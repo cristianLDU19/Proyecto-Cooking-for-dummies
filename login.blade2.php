@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>Look at me Login</title>
+	<title>LCocina con amigos</title>
 </head>
 <body>
 
@@ -19,12 +19,12 @@
 		</p>
 
 		<p>
-			{{ Form::label('email', 'Email Address') }}
-			{{ Form::text('email', Input::old('email'), array('placeholder' => 'awesome@awesome.com')) }}
+			{{ Form::label('email', 'Correo Electronico') }}
+			{{ Form::text('email', Input::old('email'), array('placeholder' => 'ejemplo@ejemplo.com')) }}
 		</p>
 
 		<p>
-			{{ Form::label('password', 'Password') }}
+			{{ Form::label('password', 'Contraseña') }}
 			{{ Form::password('password') }}
 		</p>
 
