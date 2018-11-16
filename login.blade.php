@@ -1,35 +1,43 @@
-<!doctype html>
-<html>
-<head>
-	<title>Look at me Login</title>
-</head>
-<body>
+@extends('front.template')
 
-	{{ Form::open(array('url' => 'login')) }}
-		<h1>Login</h1>
+@section('main')
+	<div class="row">
+		<div class="box">
+			<div class="col-lg-12">
+				@if(session()->has('error'))
+					@include('partials/error', ['type' => 'danger', 'message' => session('error')])
+				@endif	
+				<hr>	
+				<h2 class="intro-text text-center">{{ trans('front/login.connection') }}</h2>
+				<hr>
+				<p>{{ trans('front/login.text') }}</p>				
+				
+				{!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form']) !!}	
+				
+				<div class="row">
 
-		<!-- if there are login errors, show them here -->
-		@if (Session::get('loginError'))
-		<div class="alert alert-danger">{{ Session::get('loginError') }}</div>
-		@endif
+					{!! Form::control('text', 6, 'log', $errors, trans('front/login.log')) !!}
+					{!! Form::control('password', 6, 'password', $errors, trans('front/login.password')) !!}
+					{!! Form::submit(trans('front/form.send'), ['col-lg-12']) !!}
+					{!! Form::check('memory', trans('front/login.remind')) !!}
+					{!! Form::text('address', '', ['class' => 'hpet']) !!}		  
+					<div class="col-lg-12">					
+						{!! link_to('password/email', trans('front/login.forget')) !!}
+					</div>
 
-		<p>
-			{{ $errors->first('email') }}
-			{{ $errors->first('password') }}
-		</p>
+				</div>
+				
+				{!! Form::close() !!}
 
-		<p>
-			{{ Form::label('email', 'Email Address') }}
-			{{ Form::text('email', Input::old('email'), array('placeholder' => 'awesome@awesome.com')) }}
-		</p>
+				<div class="text-center">
+					<hr>
+						<h2 class="intro-text text-center">{{ trans('front/login.register') }}</h2>
+					<hr>	
+					<p>{{ trans('front/login.register-info') }}</p>
+					{!! link_to('auth/register', trans('front/login.registering'), ['class' => 'btn btn-default']) !!}
+				</div>
 
-		<p>
-			{{ Form::label('password', 'Password') }}
-			{{ Form::password('password') }}
-		</p>
-
-		<p>{{ Form::submit('Submit!') }}</p>
-	{{ Form::close() }}
-
-</body>
-</html>
+			</div>
+		</div>
+	</div>
+@stop
